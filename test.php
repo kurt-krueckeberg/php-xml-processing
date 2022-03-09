@@ -1,5 +1,6 @@
 <?php
-/*
+/* 
+XML layout
 <?xml version="1.0" encoding="UTF-8"?>
 <results>
   <L2_language>German</L2_language>
@@ -38,7 +39,7 @@ $skel = <<<EOS
 </results>
 EOS;
  
-function test($xml, $word)
+function simplexml_add_test($xml, $word)
 {
    $result = $xml->addChild('result'); //Note: $this->xml->results[0]
    
@@ -63,37 +64,37 @@ function test($xml, $word)
    $ex->addChild('L1_sentence', "Good evening Gisela");
 }
 
-/* function test($xml, $name)
+function simplexml_parse($xml)
 {
-  static $i = 0; 
+  echo  $xml->note[1]->to . "\n";
+  echo  $xml->note[1]->from . "\n";
+  echo  $xml->note[1]->heading . "\n";
+  echo  $xml->note[1]->body . "\n";
 
-  //$xml->result[$i]->addAttribute('id', 1);
+  echo "-----------\n";
 
-  $xml->addChild('result');
-
-  $xml->result[$i]->addChild('name', $name);
-  $xml->result[$i]->addChild('sgpa', '8.1');
-  $xml->result[$i]->addChild('cgpa', '8.4');
-  ++$i;
+  echo  $xml->note[1]->to . "\n";
+  echo  $xml->note[1]->from . "\n";
+  echo  $xml->note[1]->heading . "\n";
+  echo  $xml->note[1]->body . "\n";
 }
-*/
-/*
-function test2($xml, $name)
+
+function xmlpath_parse($xml)
 {
 
-  //$xml->result[$i]->addAttribute('id', 1);
-
-  $xml->addChild('result');
-
-  $xml->result[0]->addChild('name', $name);
-  $xml->result[0]->addChild('sgpa', '8.1');
-  $xml->result[0]->addChild('cgpa', '8.4');
 }
- */
+ // Add to xml file (created initial from string)  using SimpleXML
   $xml = new SimpleXMLElement($skel);
 
-  test($xml, "Hallo");
-  test($xml, "Abend");
+  simplexml_add_test($xml, "Hallo");
+  simplexml_add_test($xml, "Abend");
 
-  echo $xml->asXML('exp.xml');
-?>
+  $xml->asXML('exp.xml');
+  
+  echo "-----------\n";
+
+ // Parse xml file using SimpleXML
+  $xml = simplexml_load_file("notes.xml");
+  simplexml_parse($xml);
+
+  // Parse xml using DOM and XPath
