@@ -79,9 +79,22 @@ function simplexml_parse($xml)
   echo  $xml->note[1]->body . "\n";
 }
 
-function xmlpath_parse($xml)
+function xmlpath_parse($xml, string $xpath)
 {
 
+  $dom_co = $this->loadHTML($xml); // load initial page, there may be more which buildDOMTable() will fetch.
+
+  $xpath = new \DOMXPath($dom_doc);
+
+  $nodeList = $xpath->query($xpath);
+         
+  if ($nodeList->length == 0) { // if not found
+
+     return 0; 
+  }
+   
+  // todo: finish 
+  //...
 }
  // Add to xml file (created initial from string)  using SimpleXML
   $xml = new SimpleXMLElement($skel);
