@@ -79,14 +79,14 @@ function simplexml_parse($xml)
   echo  $xml->note[1]->body . "\n";
 }
 
-function xml_xpath_parse($xml, string $xpath)
+function xml_xpath_parse($xml, string $query)
 {
 
-  $dom_co = $this->loadHTML($xml); // load initial page, there may be more which buildDOMTable() will fetch.
+  $dom_doc = $this->loadHTML($xml); // load initial page, there may be more which buildDOMTable() will fetch.
 
   $xpath = new \DOMXPath($dom_doc);
 
-  $nodeList = $xpath->query($xpath);
+  $nodeList = $xpath->query($query);
          
   if ($nodeList->length == 0) { // if not found
 
