@@ -79,7 +79,7 @@ function simplexml_parse($xml)
   echo  $xml->note[1]->body . "\n";
 }
 
-function xmlpath_parse($xml, string $xpath)
+function xml_xpath_parse($xml, string $xpath)
 {
 
   $dom_co = $this->loadHTML($xml); // load initial page, there may be more which buildDOMTable() will fetch.
